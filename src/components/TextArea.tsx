@@ -32,7 +32,7 @@ const TextArea = ({ formData, setFormData }) => {
             </div>
             <ReactQuill
                 className="question-textarea"
-                style={{ minHeight: '65px' }}
+                style={{ height: '65px' }}
                 placeholder="Write something here..."
                 theme="bubble"
                 modules={modules}

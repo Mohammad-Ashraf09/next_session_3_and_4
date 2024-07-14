@@ -11,7 +11,7 @@ type HomeProps = {
 };
 
 const Home = ({ data }: HomeProps): JSX.Element => {
-    const [blogData, setBlogData] = useState([]);
+    const [blogData, setBlogData] = useState<any>([]);
     const [formData, setFormData] = useState({ title: '', content: '' });
     const router = useRouter();
 
@@ -31,7 +31,9 @@ const Home = ({ data }: HomeProps): JSX.Element => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                setBlogData(res?.data);
+                setBlogData(Object.values(res.data)?.sort((blog1, blog2)=>{
+                    return new Date(blog2.createdAt) - new Date(blog1.createdAt);
+                }));
             } catch (error: any) {
                 console.log(error);
                 if (error?.response?.status === 403) {
@@ -89,45 +91,58 @@ const Home = ({ data }: HomeProps): JSX.Element => {
 
     return (
         <>
-            <div className="home-container flex flex-col justify-center items-center">
-                <div className="create-question-container w-1/2 h-auto flex items-end p-3 my-4 rounded-xl">
-                    <TextArea formData={formData} setFormData={setFormData} />
-                    <div onClick={submitHandler}>
-                        <Button type="" label="Submit" h="24px" w="80px" fs="11px" round="6px" />
+            <div className="home-container h-full w-3/4 flex flex-col justify-center items-center">
+                <div className="create-question-container w-full flex justify-center">
+                    <div className="create-question w-2/3 h-auto flex items-end p-3 my-4 rounded-xl">
+                        <TextArea formData={formData} setFormData={setFormData} />
+                        <div onClick={submitHandler}>
+                            <Button
+                                type=""
+                                label="Submit"
+                                h="24px"
+                                w="80px"
+                                fs="11px"
+                                round="6px"
+                            />
+                        </div>
                     </div>
                 </div>
-                <div className="home-container-wrapper w-3/4 flex flex-wrap p-4 pt-0 overflow-auto">
+                <div className="home-container-wrapper w-full flex flex-wrap p-4 pt-0 overflow-auto">
                     {blogData?.map((blog: any) => (
                         <Card key={blog?._id} deleteBlogHandler={deleteBlogHandler} blog={blog} />
                     ))}
                 </div>
             </div>
             <style>{`
-                .home-container {
-                    height: calc(100vh - 86px);
+                .create-question-container {
+                    height: 160px;
 
-                    .home-container-wrapper::-webkit-scrollbar{
-                        display: none;
-                    }
-                    .create-question-container {
+                    .create-question {
                         background-color: var(--bg-color);
                         border-bottom: 2px solid var(--bg-color-dark-1);
+                        
+                        .question-textarea {
+                            width: 100%;
+                            background-color: var(--bg-color-light);
+                            border: 2px solid var(--bg-color-dark-3);
+                            border-radius: 4px;
+                            font-size: 15px;
+                            transition: 0.2s ease;
+                            margin-top: -10px;
+                        }
+                        .ql-editor {
+                            padding: 4px 8px;
+                        }
+                        .ql-editor::-webkit-scrollbar {
+                            display: none;
+                        }
                     }
-                    .question-textarea {
-                        width: 100%;
-                        background-color: var(--bg-color-light);
-                        border: 2px solid var(--bg-color-dark-3);
-                        border-radius: 4px;
-                        font-size: 15px;
-                        transition: 0.2s ease;
-                        margin-top: -10px;
-                    }
-                    .question-textarea::-webkit-scrollbar{
-                        display: none;
-                    }
-                    .ql-editor {
-                        padding: 4px 8px;
-                    }
+                }
+                .home-container-wrapper{
+                    height: calc(100% - 160px);
+                }
+                .home-container-wrapper::-webkit-scrollbar{
+                    display: none;
                 }
             `}</style>
         </>

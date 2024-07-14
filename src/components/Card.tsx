@@ -16,7 +16,7 @@ const Card = ({ blog, deleteBlogHandler }: CardProps): JSX.Element => {
 
     return (
         <>
-            <div className="card py-2 px-3 w-[20rem] h-[13rem] rounded-xl relative mb-4">
+            <div className="card py-2 px-3 w-[21rem] h-[13rem] rounded-xl relative mb-4">
                 <div className="flex justify-between">
                     <h4 className="card-title mb-2">{title}</h4>
                     <FontAwesomeIcon
