@@ -1,6 +1,10 @@
 import React from 'react';
 
-const AboutPage = () => {
+type AboutProps = {
+    data?: any;
+};
+
+const AboutPage = ({ data }: AboutProps): JSX.Element => {
     return (
         <div className="about flex justify-center items-center">
             <h1>About Page</h1>

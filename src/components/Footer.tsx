@@ -2,9 +2,19 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div className="h-8 flex justify-center">
-            <p className="text-xs">copy right, All right served, 2024</p>
-        </div>
+        <>
+            <div className="footer-container h-8 flex justify-center items-center">
+                <p className="text-xs">copy right, All rights served, 2024</p>
+            </div>
+
+            <style>{`
+                .footer-container {
+                    height: 40px;
+                    width: 100%;
+                    color: var(--button-color);
+                }
+            `}</style>
+        </>
     );
 };
 

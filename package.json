@@ -9,10 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "axios": "^1.7.2",
+    "compressorjs": "^1.2.1",
+    "firebase": "^10.12.3",
+    "markdown-to-jsx": "^7.4.7",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-quill": "^2.0.0",
+    "timeago.js": "^4.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",
