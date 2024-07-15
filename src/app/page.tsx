@@ -31,9 +31,11 @@ const Home = ({ data }: HomeProps): JSX.Element => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                setBlogData(Object.values(res.data)?.sort((blog1, blog2)=>{
-                    return new Date(blog2.createdAt) - new Date(blog1.createdAt);
-                }));
+                setBlogData(
+                    Object.values(res.data)?.sort((blog1, blog2) => {
+                        return new Date(blog2.createdAt) - new Date(blog1.createdAt);
+                    })
+                );
             } catch (error: any) {
                 console.log(error);
                 if (error?.response?.status === 403) {
@@ -60,11 +62,12 @@ const Home = ({ data }: HomeProps): JSX.Element => {
 
                 try {
                     const token = localStorage.getItem('token');
-                    await axios.post('http://localhost:8000/api/blogs/create', blog, {
+                    const res = await axios.post('http://localhost:8000/api/blogs/create', blog, {
                         headers: {
                             Authorization: `Bearer ${token}`,
                         },
                     });
+                    setBlogData((prev: any) => [res?.data, ...prev]);
                     setFormData({ title: '', content: '' });
                 } catch (error: any) {
                     console.log(error);
@@ -78,11 +81,12 @@ const Home = ({ data }: HomeProps): JSX.Element => {
         if (isDelete) {
             try {
                 const token = localStorage.getItem('token');
-                await axios.delete(`http://localhost:8000/api/blogs/delete/${id}`, {
+                const res = await axios.delete(`http://localhost:8000/api/blogs/delete/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+                setBlogData(blogData?.filter((blog: any) => blog?._id !== res?.data?._id));
             } catch (error: any) {
                 console.log(error);
             }
@@ -92,7 +96,7 @@ const Home = ({ data }: HomeProps): JSX.Element => {
     return (
         <>
             <div className="home-container h-full w-3/4 flex flex-col justify-center items-center">
-                <div className="create-question-container w-full flex justify-center">
+                <form className="create-question-container w-full flex justify-center">
                     <div className="create-question w-2/3 h-auto flex items-end p-3 my-4 rounded-xl">
                         <TextArea formData={formData} setFormData={setFormData} />
                         <div onClick={submitHandler}>
@@ -106,7 +110,7 @@ const Home = ({ data }: HomeProps): JSX.Element => {
                             />
                         </div>
                     </div>
-                </div>
+                </form>
                 <div className="home-container-wrapper w-full flex flex-wrap p-4 pt-0 overflow-auto">
                     {blogData?.map((blog: any) => (
                         <Card key={blog?._id} deleteBlogHandler={deleteBlogHandler} blog={blog} />

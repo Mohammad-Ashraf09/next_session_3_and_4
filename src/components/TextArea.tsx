@@ -16,7 +16,9 @@ const TextArea = ({ formData, setFormData }) => {
         setFormData({ ...formData, title: e.target.value });
     };
     const onChangeHandler2 = (e: any): void => {
-        setFormData({ ...formData, content: e });
+        if (e !== '<p><br></p>') {
+            setFormData({ ...formData, content: e });
+        }
     };
 
     return (
@@ -37,6 +39,7 @@ const TextArea = ({ formData, setFormData }) => {
                 theme="bubble"
                 modules={modules}
                 onChange={onChangeHandler2}
+                value={formData?.content}
             />
         </div>
     );

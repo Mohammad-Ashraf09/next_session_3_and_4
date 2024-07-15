@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const FormInput = (props: any) => {
     const [focused, setFocused] = useState(false);
-    const { name, type, placeholder, errorMsg, pattern, required, onChange } = props;
+    const { name, type, placeholder, values, errorMsg, pattern, required, onChange } = props;
 
     return (
         <>
@@ -40,6 +40,7 @@ const FormInput = (props: any) => {
                         type={type}
                         name={name}
                         placeholder={placeholder}
+                        value={values}
                         pattern={pattern}
                         required={required}
                         onChange={onChange}

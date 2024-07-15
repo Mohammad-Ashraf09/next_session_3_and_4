@@ -24,15 +24,16 @@ const Navbar = () => {
                 </div>
                 {!['/signup', '/login'].includes(pathname) ? (
                     <div className="h-full flex items-center mr-8">
-                        <Link href="/" className={pathname === '/' ? 'active' : 'inactive'}>
-                            <div className="mr-8"> Home </div>
-                        </Link>
-                        <Link
-                            href="/about"
-                            className={pathname.includes('/about') ? 'active' : 'inactive'}
-                        >
-                            <div className="mr-8"> About </div>
-                        </Link>
+                        <div className={pathname === '/' ? 'active' : 'inactive'}>
+                            <Link href="/">
+                                <div className="mr-8"> Home </div>
+                            </Link>
+                        </div>
+                        <div className={pathname === '/about' ? 'active' : 'inactive'}>
+                            <Link href="/about">
+                                <div className="mr-8"> About </div>
+                            </Link>
+                        </div>
                         <div
                             className="logout text-white py-1 px-4 rounded-md cursor-pointer"
                             onClick={logoutHandler}
@@ -55,11 +56,9 @@ const Navbar = () => {
                     color: var(--button-color);
                 }
                 .active {
-                    text-decoration: none;
-                    color: var(--button-color);
+                    color: var(--button-color) !important;
                 }
                 .inactive {
-                    text-decoration: none;
                     color: black;
                 }
                 .logout {
