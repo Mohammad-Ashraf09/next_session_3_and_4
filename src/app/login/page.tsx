@@ -70,7 +70,7 @@ const Login = ({ data }: LoginProps): JSX.Element => {
                         type={item.type}
                         placeholder={item.placeholder}
                         values={values[item.name]}
-                        onChange={onChangeHandler}
+                        onChangeHandler={onChangeHandler}
                     />
                 ))}
                 {invalidCredential && (
@@ -85,9 +85,8 @@ const Login = ({ data }: LoginProps): JSX.Element => {
                     <div className="texts"> Forgot Password? </div>
                 </div>
 
-                {/* <button className="btn mt-16">Login</button> */}
                 <div className="mt-16">
-                    <Button type="submit" label="Login" w="140px" />
+                    <Button label="Login" width="140px" />
                 </div>
                 <Link href="/signup" className="">
                     <p className="texts my-2 text-[10px]">don&apos;t have account?</p>

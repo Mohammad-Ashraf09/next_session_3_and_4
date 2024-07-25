@@ -1,25 +1,33 @@
 import React from 'react';
 
+type ButtonProps = {
+    label?: string;
+    isDisabled?: boolean;
+    height?: string;
+    width?: string;
+    fontSize?: string;
+    borderRadius?: string;
+};
+
 const Button = ({
-    type,
     label,
     isDisabled = false,
-    h = '36px',
-    w = '120px',
-    fs = '14px',
-    round = '25px',
-}) => {
+    height = '36px',
+    width = '120px',
+    fontSize = '14px',
+    borderRadius = '25px',
+}: ButtonProps): JSX.Element => {
     return (
         <>
-            <button type={type} className="btn" disabled={isDisabled}>
+            <button className="btn" disabled={isDisabled}>
                 {label}
             </button>
             <style>{`
                 .btn {
-                    height: ${h};
-                    width: ${w};
-                    font-size: ${fs};
-                    border-radius: ${round};
+                    height: ${height};
+                    width: ${width};
+                    font-size: ${fontSize};
+                    border-radius: ${borderRadius};
                     color: #fff;
                     border: none;
                     display: flex;

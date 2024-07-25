@@ -34,7 +34,7 @@ const Card = ({ blog, deleteBlogHandler }: CardProps): JSX.Element => {
                     <p className="card-date text-[10px]">{format(createdAt)}</p>
                 </div>
                 <Link href={`/blog/${_id}`} className="read-more absolute w-11/12 cursor-pointer">
-                    <Button type="" label="Read More" h="24px" w="80px" fs="11px" round="6px" />
+                    <Button label="Read More" height="24px" width="80px" fontSize="11px" borderRadius="6px" />
                 </Link>
             </div>
 

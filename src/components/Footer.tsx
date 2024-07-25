@@ -1,6 +1,10 @@
 import React from 'react';
 
-const Footer = () => {
+type FooterProps = {
+    data?: any;
+};
+
+const Footer = ({ data }: FooterProps): JSX.Element => {
     return (
         <>
             <div className="footer-container h-8 flex justify-center items-center">

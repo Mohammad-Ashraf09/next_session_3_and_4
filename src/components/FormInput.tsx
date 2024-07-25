@@ -1,9 +1,28 @@
 'use client';
 import { useState } from 'react';
 
-const FormInput = (props: any) => {
+type FormProps = {
+    name?: string;
+    type?: string;
+    placeholder?: string;
+    values?: string;
+    errorMsg?: string;
+    pattern?: string;
+    required?: boolean;
+    onChangeHandler?: (data: any) => void;
+};
+
+const FormInput = ({
+    name,
+    type,
+    placeholder,
+    values,
+    errorMsg,
+    pattern,
+    required,
+    onChangeHandler,
+}: FormProps): JSX.Element => {
     const [focused, setFocused] = useState(false);
-    const { name, type, placeholder, values, errorMsg, pattern, required, onChange } = props;
 
     return (
         <>
@@ -21,7 +40,7 @@ const FormInput = (props: any) => {
                             value="male"
                             defaultChecked
                             name="gender"
-                            onClick={onChange}
+                            onClick={onChangeHandler}
                         />
                         <label htmlFor="male">Male</label>
                         <input
@@ -29,7 +48,7 @@ const FormInput = (props: any) => {
                             id="female"
                             value="female"
                             name="gender"
-                            onClick={onChange}
+                            onClick={onChangeHandler}
                         />
                         <label htmlFor="female">Female</label>
                     </div>
@@ -43,9 +62,9 @@ const FormInput = (props: any) => {
                         value={values}
                         pattern={pattern}
                         required={required}
-                        onChange={onChange}
+                        onChange={onChangeHandler}
                         onBlur={() => setFocused(true)}
-                        onFocus={() => name === 'confirmPassword' && setFocused(true)}
+                        // onFocus={() => name === 'confirmPassword' && setFocused(true)}
                         focused={focused.toString()}
                     />
                     <div className="error-msg">{errorMsg}</div>
@@ -87,7 +106,7 @@ const FormInput = (props: any) => {
                     display: block;
                     box-sizing: border-box;
                     margin-bottom: 20px;
-                    padding: 4px;
+                    padding: 4px 8px;
                     width: 100%;
                     height: 32px;
                     border: none;
@@ -95,7 +114,7 @@ const FormInput = (props: any) => {
                     border-radius: 2px;
                     font-family: 'Roboto', sans-serif;
                     font-weight: 400;
-                    font-size: 15px;
+                    font-size: 13px;
                     transition: 0.2s ease;
                 }
                 .error-msg {

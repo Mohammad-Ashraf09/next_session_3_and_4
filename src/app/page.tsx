@@ -1,6 +1,7 @@
 'use client';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
+import FormInput from '@/components/FormInput';
 import TextArea from '@/components/TextArea';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -93,20 +94,34 @@ const Home = ({ data }: HomeProps): JSX.Element => {
         }
     };
 
+    const onChangeHandler = (e: any): void => {
+        setFormData({ ...formData, title: e.target.value });
+    };
+
     return (
         <>
             <div className="home-container h-full w-3/4 flex flex-col justify-center items-center">
                 <form className="create-question-container w-full flex justify-center">
                     <div className="create-question w-2/3 h-auto flex items-end p-3 my-4 rounded-xl">
-                        <TextArea formData={formData} setFormData={setFormData} />
+                        <div className="w-full mr-2">
+                            <div className="w-1/2">
+                                <FormInput
+                                    name="title"
+                                    type="text"
+                                    placeholder="Enter title..."
+                                    values={formData?.title}
+                                    onChangeHandler={onChangeHandler}
+                                />
+                            </div>
+                            <TextArea formData={formData} setFormData={setFormData} />
+                        </div>
                         <div onClick={submitHandler}>
                             <Button
-                                type=""
                                 label="Submit"
-                                h="24px"
-                                w="80px"
-                                fs="11px"
-                                round="6px"
+                                height="24px"
+                                width="80px"
+                                fontSize="11px"
+                                borderRadius="6px"
                             />
                         </div>
                     </div>
@@ -128,7 +143,7 @@ const Home = ({ data }: HomeProps): JSX.Element => {
                         .question-textarea {
                             width: 100%;
                             background-color: var(--bg-color-light);
-                            border: 2px solid var(--bg-color-dark-3);
+                            border-bottom: 1px solid var(--bg-color-dark-4);
                             border-radius: 4px;
                             font-size: 15px;
                             transition: 0.2s ease;

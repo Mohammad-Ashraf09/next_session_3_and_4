@@ -166,7 +166,7 @@ const Signup = ({ data }: SignupProps): JSX.Element => {
                             pattern={item.pattern}
                             required={item.required}
                             values={values[item.name]}
-                            onChange={onChangeHandler}
+                            onChangeHandler={onChangeHandler}
                         />
                     ))}
                     <div className="flex items-center">
@@ -193,7 +193,7 @@ const Signup = ({ data }: SignupProps): JSX.Element => {
 
                     <div className="navigations flex justify-between items-end mt-12">
                         {!hideSaveBtn ? (
-                            <Button type="submit" label="Register" isDisabled={disable} />
+                            <Button label="Register" isDisabled={disable} />
                         ) : null}
                         {isLoader ? (
                             <div className="loader-button">
