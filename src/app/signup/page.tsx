@@ -14,7 +14,7 @@ type SignupProps = {
     data?: any;
 };
 
-const Signup = ({ data }: SignupProps): JSX.Element => {
+const Signup = ({ data }: SignupProps): React.JSX.Element => {
     const defaultDP = '/assets/default-dp.png';
     const loader = '/assets/gif-loader.gif';
     const dummyDP = [
@@ -136,8 +136,8 @@ const Signup = ({ data }: SignupProps): JSX.Element => {
     }, [values?.profilePicture]);
 
     useEffect(() => {
-        const isTokenExist = localStorage.getItem('token');
-        if (isTokenExist) {
+        const token = localStorage.getItem('token');
+        if (token) {
             router.push('/');
         }
     }, []);

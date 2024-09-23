@@ -11,7 +11,7 @@ type LoginProps = {
     data?: any;
 };
 
-const Login = ({ data }: LoginProps): JSX.Element => {
+const Login = ({ data }: LoginProps): React.JSX.Element => {
     const [invalidCredential, setInvalidCredential] = useState(false);
     const [values, setValues] = useState<any>({ email: '', password: '' });
     const router = useRouter();
@@ -50,8 +50,8 @@ const Login = ({ data }: LoginProps): JSX.Element => {
     };
 
     useEffect(() => {
-        const isTokenExist = localStorage.getItem('token');
-        if (isTokenExist) {
+        const token = localStorage.getItem('token');
+        if (token) {
             router.push('/');
         }
     }, []);

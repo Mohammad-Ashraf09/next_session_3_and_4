@@ -17,7 +17,9 @@ const modules = {
 
 const TextArea = ({ formData, setFormData }: TextAreaProps): JSX.Element => {
     const onChangeHandler = (e: any): void => {
-        if (e !== '<p><br></p>') {
+        if (e === '<p><br></p>') {
+            setFormData({ ...formData, content: '' });
+        } else {
             setFormData({ ...formData, content: e });
         }
     };

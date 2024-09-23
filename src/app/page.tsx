@@ -11,10 +11,15 @@ type HomeProps = {
     data?: any;
 };
 
-const Home = ({ data }: HomeProps): JSX.Element => {
+const Home = ({ data }: HomeProps): React.JSX.Element => {
     const [blogData, setBlogData] = useState<any>([]);
     const [formData, setFormData] = useState({ title: '', content: '' });
     const router = useRouter();
+
+    // const [message, setMessage] = useState('hello newers, how are you?');
+    // const [encrypted, setEncrypted] = useState('');
+    // const [decrypted, setDecrypted] = useState('');
+    // const [publicKey, setPublicKey] = useState('');
 
     useEffect(() => {
         const getData = async () => {
@@ -25,23 +30,28 @@ const Home = ({ data }: HomeProps): JSX.Element => {
             //     console.log(err);
             // }
 
-            try {
-                const token = localStorage.getItem('token');
-                const res = await axios.get('http://localhost:8000/api/blogs', {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                setBlogData(
-                    Object.values(res.data)?.sort((blog1, blog2) => {
-                        return new Date(blog2.createdAt) - new Date(blog1.createdAt);
-                    })
-                );
-            } catch (error: any) {
-                console.log(error);
-                if (error?.response?.status === 403) {
-                    router.push('/login');
+            const token = localStorage.getItem('token');
+            if(token) {
+                try {
+                    const res = await axios.get('http://localhost:8000/api/blogs', {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
+                    setBlogData(
+                        Object.values(res.data)?.sort((blog1, blog2) => {
+                            return new Date(blog2.createdAt) - new Date(blog1.createdAt);
+                        })
+                    );
+                } catch (error: any) {
+                    console.log(error);
+                    if (error?.response?.status === 403) {
+                        localStorage.removeItem('token');
+                        router.push('/login');
+                    }
                 }
+            } else {
+                router.push('/login');
             }
         };
         getData();
@@ -56,9 +66,13 @@ const Home = ({ data }: HomeProps): JSX.Element => {
             if (isSubmit) {
                 const user = JSON.parse(localStorage?.getItem('user'));
                 const blog = {
-                    author: user?.name,
+                    authorId: user?._id,
+                    authorName: user?.name,
+                    authorDP: user?.profilePicture,
                     title: formData?.title,
                     content: formData?.content,
+                    // category: formData?.category,
+                    category: 'other',
                 };
 
                 try {
@@ -98,6 +112,51 @@ const Home = ({ data }: HomeProps): JSX.Element => {
         setFormData({ ...formData, title: e.target.value });
     };
 
+    // useEffect(() => {
+    //     const token = localStorage.getItem('token');
+    //     fetch('http://localhost:8000/api/enc/public-key', {
+    //         method: 'GET',
+    //         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => setPublicKey(data.publicKey))
+    //         .catch((error) => console.error('Error fetching public key:', error));
+    // }, []);
+
+    // const handleEncrypt = async () => {
+    //     const token = localStorage.getItem('token');
+    //     const response = await fetch('http://localhost:8000/api/enc/encrypt', {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //       body: JSON.stringify({ message, publicKey })
+    //     });
+    //     const data = await response.json();
+    //     setEncrypted(data.encrypted);
+    // };
+
+    // const handleDecrypt = async () => {
+    //     const token = localStorage.getItem('token');
+    //     const response = await fetch('http://localhost:8000/api/enc/decrypt', {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //         Authorization: `Bearer ${token}`,
+    //       },
+    //       body: JSON.stringify({ encrypted })
+    //     });
+
+    //     if (response.ok) {
+    //         const data = await response.json();
+    //         setDecrypted(data.decrypted);
+    //     } else {
+    //         alert('Decryption failed or unauthorized');
+    //     }
+    // };
+    // console.log({message, encrypted, decrypted})
+
     return (
         <>
             <div className="home-container h-full w-3/4 flex flex-col justify-center items-center">
@@ -126,6 +185,8 @@ const Home = ({ data }: HomeProps): JSX.Element => {
                         </div>
                     </div>
                 </form>
+                {/* <button onClick={handleEncrypt}>Encrypt</button>
+                <button onClick={handleDecrypt}>Decrypt</button> */}
                 <div className="home-container-wrapper w-full flex flex-wrap p-4 pt-0 overflow-auto">
                     {blogData?.map((blog: any) => (
                         <Card key={blog?._id} deleteBlogHandler={deleteBlogHandler} blog={blog} />
