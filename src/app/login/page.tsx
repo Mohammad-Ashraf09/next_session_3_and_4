@@ -39,7 +39,11 @@ const Login = ({ data }: LoginProps): React.JSX.Element => {
         e.preventDefault();
         try {
             if (values.email?.length > 0 && values.password?.length > 0) {
-                const response = await axios.post(`http://localhost:8000/api/auth/login`, values);
+                // const response = await axios.post(`http://localhost:8000/api/auth/login`, values);
+                const response = await axios.post(
+                    `https://blog-backend-zeta-nine.vercel.app/api/auth/login`,
+                    values
+                );
                 localStorage.setItem('token', response?.data.accessToken);
                 localStorage.setItem('user', JSON.stringify(response?.data.other));
                 router.push('/');

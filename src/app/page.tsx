@@ -31,13 +31,17 @@ const Home = ({ data }: HomeProps): React.JSX.Element => {
             // }
 
             const token = localStorage.getItem('token');
-            if(token) {
+            if (token) {
                 try {
-                    const res = await axios.get('http://localhost:8000/api/blogs', {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    });
+                    // const res = await axios.get('http://localhost:8000/api/blogs', {
+                    const res = await axios.get(
+                        'https://blog-backend-zeta-nine.vercel.app/api/blogs',
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                            },
+                        }
+                    );
                     setBlogData(
                         Object.values(res.data)?.sort((blog1, blog2) => {
                             return new Date(blog2.createdAt) - new Date(blog1.createdAt);
@@ -77,11 +81,16 @@ const Home = ({ data }: HomeProps): React.JSX.Element => {
 
                 try {
                     const token = localStorage.getItem('token');
-                    const res = await axios.post('http://localhost:8000/api/blogs/create', blog, {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    });
+                    // const res = await axios.post('http://localhost:8000/api/blogs/create', blog, {
+                    const res = await axios.post(
+                        'https://blog-backend-zeta-nine.vercel.app/api/blogs/create',
+                        blog,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                            },
+                        }
+                    );
                     setBlogData((prev: any) => [res?.data, ...prev]);
                     setFormData({ title: '', content: '' });
                 } catch (error: any) {
@@ -96,11 +105,15 @@ const Home = ({ data }: HomeProps): React.JSX.Element => {
         if (isDelete) {
             try {
                 const token = localStorage.getItem('token');
-                const res = await axios.delete(`http://localhost:8000/api/blogs/delete/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                // const res = await axios.delete(`http://localhost:8000/api/blogs/delete/${id}`, {
+                const res = await axios.delete(
+                    `https://blog-backend-zeta-nine.vercel.app/api/blogs/delete/${id}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
                 setBlogData(blogData?.filter((blog: any) => blog?._id !== res?.data?._id));
             } catch (error: any) {
                 console.log(error);

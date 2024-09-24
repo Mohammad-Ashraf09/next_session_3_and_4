@@ -17,11 +17,15 @@ const ParticularBlogPage = ({ data }: BlogProps): JSX.Element => {
         const getData = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const res = await axios.get(`http://localhost:8000/api/blogs/${params?.id}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                // const res = await axios.get(`http://localhost:8000/api/blogs/${params?.id}`, {
+                const res = await axios.get(
+                    `https://blog-backend-zeta-nine.vercel.app/api/blogs/${params?.id}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
                 setBlogData(res?.data);
             } catch (err) {
                 console.log(err);

@@ -123,7 +123,11 @@ const Signup = ({ data }: SignupProps): React.JSX.Element => {
         if (values?.profilePicture) {
             const saveDetailsToDB = async () => {
                 try {
-                    await axios.post(`http://localhost:8000/api/auth/register`, values);
+                    // await axios.post(`http://localhost:8000/api/auth/register`, values);
+                    await axios.post(
+                        `https://blog-backend-zeta-nine.vercel.app/api/auth/register`,
+                        values
+                    );
                     setIsLoader(false);
                     setHideSaveBtn(false);
                     router.push('/login');
@@ -192,9 +196,7 @@ const Signup = ({ data }: SignupProps): React.JSX.Element => {
                     </div>
 
                     <div className="navigations flex justify-between items-end mt-12">
-                        {!hideSaveBtn ? (
-                            <Button label="Register" isDisabled={disable} />
-                        ) : null}
+                        {!hideSaveBtn ? <Button label="Register" isDisabled={disable} /> : null}
                         {isLoader ? (
                             <div className="loader-button">
                                 <Image
