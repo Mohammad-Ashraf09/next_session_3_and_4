@@ -5,11 +5,7 @@ import { useParams } from 'next/navigation';
 import { format } from 'timeago.js';
 import Markdown from 'markdown-to-jsx';
 
-type BlogProps = {
-    data?: any;
-};
-
-const ParticularBlogPage = ({ data }: BlogProps): JSX.Element => {
+const ParticularBlogPage = (): JSX.Element => {
     const [blogData, setBlogData] = useState<any>({});
     const params = useParams();
 

@@ -10,11 +10,7 @@ import { utils } from '@/util/utils';
 import Button from '@/components/Button';
 // import { REACT_APP_BASE_URL } from '@/config/keys';
 
-type SignupProps = {
-    data?: any;
-};
-
-const Signup = ({ data }: SignupProps): React.JSX.Element => {
+const Signup = (): React.JSX.Element => {
     const defaultDP = '/assets/default-dp.png';
     const loader = '/assets/gif-loader.gif';
     const dummyDP = [

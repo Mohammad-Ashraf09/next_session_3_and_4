@@ -7,11 +7,7 @@ import FormInput from '@/components/FormInput';
 import Button from '@/components/Button';
 // import { REACT_APP_BASE_URL } from '../config/keys';
 
-type LoginProps = {
-    data?: any;
-};
-
-const Login = ({ data }: LoginProps): React.JSX.Element => {
+const Login = (): React.JSX.Element => {
     const [invalidCredential, setInvalidCredential] = useState(false);
     const [values, setValues] = useState<any>({ email: '', password: '' });
     const router = useRouter();

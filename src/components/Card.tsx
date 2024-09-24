@@ -7,12 +7,7 @@ import Markdown from 'markdown-to-jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
-type CardProps = {
-    blog?: any;
-    deleteBlogHandler?: any;
-};
-
-const Card = ({ blog, deleteBlogHandler }: CardProps): JSX.Element => {
+const Card = ({ blog, deleteBlogHandler }): JSX.Element => {
     const [partialHtmlString, setPartialHtmlString] = useState('');
     const { _id, authorId, authorName, authorDP, title, content, category, createdAt } = blog;
 

@@ -1,17 +1,6 @@
 'use client';
 import { useState } from 'react';
 
-type FormProps = {
-    name?: string;
-    type?: string;
-    placeholder?: string;
-    values?: string;
-    errorMsg?: string;
-    pattern?: string;
-    required?: boolean;
-    onChangeHandler?: (data: any) => void;
-};
-
 const FormInput = ({
     name,
     type,
@@ -21,7 +10,7 @@ const FormInput = ({
     pattern,
     required,
     onChangeHandler,
-}: FormProps): JSX.Element => {
+}): JSX.Element => {
     const [focused, setFocused] = useState(false);
 
     return (

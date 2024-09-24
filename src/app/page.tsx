@@ -7,11 +7,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-type HomeProps = {
-    data?: any;
-};
-
-const Home = ({ data }: HomeProps): React.JSX.Element => {
+const Home = (): React.JSX.Element => {
     const [blogData, setBlogData] = useState<any>([]);
     const [formData, setFormData] = useState({ title: '', content: '' });
     const router = useRouter();

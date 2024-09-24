@@ -3,19 +3,7 @@ import TermsAndConditionsPopup from './TermsAndConditionsPopup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-type PopupLayoutProps = {
-    blurrScreenHandler: () => void;
-    popup?: string;
-    height?: string;
-    width?: string;
-};
-
-const PopupLayout = ({
-    blurrScreenHandler,
-    popup,
-    height,
-    width,
-}: PopupLayoutProps): JSX.Element => {
+const PopupLayout = ({ blurrScreenHandler, popup, height, width }): JSX.Element => {
     const popupMappings = {
         TermsAndConditionsPopup: TermsAndConditionsPopup,
     };

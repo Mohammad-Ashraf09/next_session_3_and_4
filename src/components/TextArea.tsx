@@ -1,11 +1,6 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
 
-type TextAreaProps = {
-    formData?: any;
-    setFormData?: any;
-};
-
 const modules = {
     toolbar: [
         ['bold', 'italic', 'underline'],
@@ -15,7 +10,7 @@ const modules = {
     ],
 };
 
-const TextArea = ({ formData, setFormData }: TextAreaProps): JSX.Element => {
+const TextArea = ({ formData, setFormData }): JSX.Element => {
     const onChangeHandler = (e: any): void => {
         if (e === '<p><br></p>') {
             setFormData({ ...formData, content: '' });

@@ -2,11 +2,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-type NavbarProps = {
-    data?: any;
-};
-
-const Navbar = ({ data }: NavbarProps): JSX.Element => {
+const Navbar = (): JSX.Element => {
     const pathname = usePathname();
     const router = useRouter();
 

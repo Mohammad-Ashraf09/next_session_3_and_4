@@ -1,10 +1,6 @@
 import React from 'react';
 
-type TermsAndConditionsPopupProps = {
-    data?: any;
-};
-
-const TermsAndConditionsPopup = ({ data }: TermsAndConditionsPopupProps): JSX.Element => {
+const TermsAndConditionsPopup = (): JSX.Element => {
     return (
         <>
             <div className="h-full py-2 px-4">
