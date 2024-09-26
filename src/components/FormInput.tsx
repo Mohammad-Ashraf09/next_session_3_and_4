@@ -1,6 +1,17 @@
 'use client';
 import { useState } from 'react';
 
+type FormInputProps = {
+    name: string;
+    type: string;
+    placeholder: string;
+    values: any;
+    errorMsg?: any;
+    pattern?: any;
+    required?: any;
+    onChangeHandler: any;
+};
+
 const FormInput = ({
     name,
     type,
@@ -10,7 +21,7 @@ const FormInput = ({
     pattern,
     required,
     onChangeHandler,
-}): JSX.Element => {
+}: FormInputProps): React.JSX.Element => {
     const [focused, setFocused] = useState(false);
 
     return (
@@ -54,7 +65,7 @@ const FormInput = ({
                         onChange={onChangeHandler}
                         onBlur={() => setFocused(true)}
                         // onFocus={() => name === 'confirmPassword' && setFocused(true)}
-                        focused={focused.toString()}
+                        className={focused ? 'focused' : ''}
                     />
                     <div className="error-msg">{errorMsg}</div>
                 </div>
@@ -113,10 +124,10 @@ const FormInput = ({
                     margin-top: -20px;
                     display: none;
                 }
-                input:invalid[focused='true'] {
+                input:invalid.focused {
                     border-bottom: 1px solid red;
                 }
-                input:invalid[focused='true'] ~ .error-msg {
+                input:invalid.focused ~ .error-msg {
                     display: block;
                 }
                 [placeholder] {

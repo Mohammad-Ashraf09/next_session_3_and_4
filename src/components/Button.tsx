@@ -1,5 +1,14 @@
 import React from 'react';
 
+type ButtonProps = {
+    label: string;
+    isDisabled?: boolean;
+    height?: string;
+    width?: string;
+    fontSize?: string;
+    borderRadius?: string;
+};
+
 const Button = ({
     label,
     isDisabled = false,
@@ -7,7 +16,7 @@ const Button = ({
     width = '120px',
     fontSize = '14px',
     borderRadius = '25px',
-}): JSX.Element => {
+}: ButtonProps): React.JSX.Element => {
     return (
         <>
             <button className="btn" disabled={isDisabled}>

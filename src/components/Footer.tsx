@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer = (): JSX.Element => {
+const Footer = (): React.JSX.Element => {
     return (
         <>
             <div className="footer-container h-8 flex justify-center items-center">

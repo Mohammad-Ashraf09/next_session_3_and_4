@@ -39,8 +39,12 @@ const Home = (): React.JSX.Element => {
                         }
                     );
                     setBlogData(
-                        Object.values(res.data)?.sort((blog1, blog2) => {
-                            return new Date(blog2.createdAt) - new Date(blog1.createdAt);
+                        Object.values(res.data)?.sort((blog1: any, blog2: any) => {
+                            // Type assertion to ensure `createdAt` is a string
+                            const date1 = new Date(blog1.createdAt as string);
+                            const date2 = new Date(blog2.createdAt as string);
+
+                            return date2.getTime() - date1.getTime();
                         })
                     );
                 } catch (error: any) {
@@ -57,14 +61,14 @@ const Home = (): React.JSX.Element => {
         getData();
     }, []);
 
-    const submitHandler = async (e) => {
+    const submitHandler = async (e: any) => {
         e.preventDefault();
         if (formData?.title?.length === 0 || formData?.content?.length === 0) {
             window.alert('Please fill empty field');
         } else {
             const isSubmit = window.confirm('Are you sure, you want to submit?');
             if (isSubmit) {
-                const user = JSON.parse(localStorage?.getItem('user'));
+                const user = JSON.parse(localStorage.getItem('user') || '{}');
                 const blog = {
                     authorId: user?._id,
                     authorName: user?.name,
@@ -198,7 +202,7 @@ const Home = (): React.JSX.Element => {
                 <button onClick={handleDecrypt}>Decrypt</button> */}
                 <div className="home-container-wrapper w-full flex flex-wrap p-4 pt-0 overflow-auto">
                     {blogData?.map((blog: any) => (
-                        <Card key={blog?._id} deleteBlogHandler={deleteBlogHandler} blog={blog} />
+                        <Card key={blog?._id} blog={blog} deleteBlogHandler={deleteBlogHandler} />
                     ))}
                 </div>
             </div>

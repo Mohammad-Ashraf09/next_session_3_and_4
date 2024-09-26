@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TermsAndConditionsPopup = (): JSX.Element => {
+const TermsAndConditionsPopup = (): React.JSX.Element => {
     return (
         <>
             <div className="h-full py-2 px-4">

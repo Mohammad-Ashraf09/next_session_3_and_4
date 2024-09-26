@@ -7,7 +7,12 @@ import Markdown from 'markdown-to-jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
-const Card = ({ blog, deleteBlogHandler }): JSX.Element => {
+type CardProps = {
+    blog: any;
+    deleteBlogHandler: any;
+};
+
+const Card = ({ blog, deleteBlogHandler }: CardProps): React.JSX.Element => {
     const [partialHtmlString, setPartialHtmlString] = useState('');
     const { _id, authorId, authorName, authorDP, title, content, category, createdAt } = blog;
 
@@ -36,12 +41,12 @@ const Card = ({ blog, deleteBlogHandler }): JSX.Element => {
                 const tagName = node.nodeName.toLowerCase();
                 partialHtml += `<${tagName}`;
 
-                Array.from(node.attributes).forEach((attr) => {
+                Array.from(node.attributes).forEach((attr: any) => {
                     partialHtml += ` ${attr.name}="${attr.value}"`;
                 });
 
                 partialHtml += '>';
-                node.childNodes.forEach((child) => traverseNodes(child, count));
+                node.childNodes.forEach((child: any) => traverseNodes(child, count));
                 partialHtml += `</${tagName}>`;
             }
         };

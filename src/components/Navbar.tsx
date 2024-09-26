@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-const Navbar = (): JSX.Element => {
+const Navbar = (): React.JSX.Element => {
     const pathname = usePathname();
     const router = useRouter();
 

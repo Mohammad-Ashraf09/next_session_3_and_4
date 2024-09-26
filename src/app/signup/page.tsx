@@ -30,7 +30,7 @@ const Signup = (): React.JSX.Element => {
 
     const [disable, setDisable] = useState(true);
     const [currentDP, setCurrentDP] = useState(defaultDP);
-    const [dpPreview, setDpPreview] = useState(null);
+    const [dpPreview, setDpPreview] = useState<string | null>(null);
     const [isLoader, setIsLoader] = useState(false);
     const [hideSaveBtn, setHideSaveBtn] = useState(false);
     const [showTermsAndConditionsPopup, setShowTermsAndConditionsPopup] = useState(false);
@@ -88,20 +88,23 @@ const Signup = (): React.JSX.Element => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
 
-    const dpHandler = (dp) => {
+    const dpHandler = (dp: any) => {
         setCurrentDP(dp);
         setDpPreview(null);
     };
 
-    const dpFromGalleryHandler = (e) => {
+    const dpFromGalleryHandler = (e: any) => {
         if (e.target.files[0]) {
             const objectUrl = URL.createObjectURL(e.target.files[0]);
             setDpPreview(objectUrl);
             setCurrentDP(e.target.files[0]);
+
+            // clean up the object URL when it is no longer needed
+            return () => URL.revokeObjectURL(objectUrl);
         }
     };
 
-    const submitHandler = async (e) => {
+    const submitHandler = async (e: any) => {
         e.preventDefault();
         setIsLoader(true);
         setHideSaveBtn(true);
@@ -143,12 +146,14 @@ const Signup = (): React.JSX.Element => {
     }, []);
 
     const blurrScreenHandler = () => {
-        setShowTermsAndConditionsPopup(!showTermsAndConditionsPopup);
+        setShowTermsAndConditionsPopup((prev) => !prev);
 
-        if (!showTermsAndConditionsPopup) {
-            document.body.style.overflow = 'hidden';
-            document.body.scrollIntoView();
-        } else document.body.style.overflow = 'auto';
+        if (typeof window !== 'undefined') {
+            if (!showTermsAndConditionsPopup) {
+                document.body.style.overflow = 'hidden';
+                document.body.scrollIntoView();
+            } else document.body.style.overflow = 'auto';
+        }
     };
 
     return (
